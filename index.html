@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no,email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="宝象金融" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      //是否app已经调用过setToken方法
+     window.setTokenFlag=false;//生产
+      // window.setTokenFlag=true;
+      function setToken(accessToken){
+        window.setTokenFlag=true
+      if(accessToken&&accessToken=="app"){
+        //app未登录时传的标示
+          try{
+              localStorage.removeItem('persion');
+          }catch(r){
+              sessionStorage.removeItem('persion');
+          }
+      }else{
+          var persion = JSON.stringify({"accessToken": accessToken});
+          try{
+            localStorage['persion'] =persion;
+          }catch(r){
+            sessionStorage['persion'] =persion;
+          }
+      }
+    }
+      var jumpApp = function(response) {
+        try{localStorage.setItem('appFunc',JSON.stringify(response));}catch(r)
+        {sessionStorage.setItem('appFunc',JSON.stringify(response));}
+      }
+    </script>
+  
+  </body>
+</html>
